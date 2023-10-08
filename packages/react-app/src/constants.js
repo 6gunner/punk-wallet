@@ -291,14 +291,6 @@ export const DAI_ABI = [
   },
 ];
 
-export const NETWORK = chainId => {
-  for (const n in NETWORKS) {
-    if (NETWORKS[n].chainId == chainId) {
-      return NETWORKS[n];
-    }
-  }
-};
-
 export const NETWORKS = {
   ethereum: {
     name: "ethereum",
@@ -312,31 +304,31 @@ export const NETWORKS = {
         name: "EURe",
         address: "0x3231cb76718cdef2155fc47b5286d82e6eda273f",
         decimals: 18,
-        imgSrc: "/EURe.png"
+        imgSrc: "/EURe.png",
       },
       {
         name: "USDC",
         address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
         decimals: 6,
-        imgSrc: "/USDC.png"
+        imgSrc: "/USDC.png",
       },
       {
         name: "USDT",
         address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
         decimals: 6,
-        imgSrc: "/USDT.png"
+        imgSrc: "/USDT.png",
       },
       {
         name: "DAI",
         address: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
         decimals: 18,
-        imgSrc: "/DAI.png"
+        imgSrc: "/DAI.png",
       },
     ],
     nativeToken: {
-      name:"ETH",
-      imgSrc:"/ETH.png"
-    }
+      name: "ETH",
+      imgSrc: "/ETH.png",
+    },
   },
   buidlguidl: {
     name: "buidlguidl",
@@ -352,7 +344,7 @@ export const NETWORKS = {
     price: "uniswap",
     chainId: 324,
     rpcUrl: "https://mainnet.era.zksync.io",
-    blockExplorer: "https://explorer.zksync.io/"
+    blockExplorer: "https://explorer.zksync.io/",
   },
   optimism: {
     name: "optimism",
@@ -361,38 +353,38 @@ export const NETWORKS = {
     chainId: 10,
     blockExplorer: "https://optimistic.etherscan.io/",
     rpcUrl: `https://opt-mainnet.g.alchemy.com/v2/gzr_xuzv2SPwbPchC9Z41qmfodlDglKp`,
-    //rpcUrl: `https://mainnet.optimism.io`,
-    //gasPrice: 1000000,
+    // rpcUrl: `https://mainnet.optimism.io`,
+    // gasPrice: 1000000,
     erc20Tokens: [
       {
         name: "OP",
         address: "0x4200000000000000000000000000000000000042",
         decimals: 18,
-        imgSrc: "/OP.png"
+        imgSrc: "/OP.png",
       },
       {
         name: "USDC",
         address: "0x7F5c764cBc14f9669B88837ca1490cCa17c31607",
         decimals: 6,
-        imgSrc: "/USDC.png"
+        imgSrc: "/USDC.png",
       },
       {
         name: "USDT",
         address: "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
         decimals: 6,
-        imgSrc: "/USDT.png"
+        imgSrc: "/USDT.png",
       },
       {
         name: "DAI",
         address: "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
         decimals: 18,
-        imgSrc: "/DAI.png"
+        imgSrc: "/DAI.png",
       },
     ],
     nativeToken: {
-      name:"ETH",
-      imgSrc:"/ETH.png"
-    }
+      name: "ETH",
+      imgSrc: "/ETH.png",
+    },
   },
   base: {
     name: "base",
@@ -400,7 +392,7 @@ export const NETWORKS = {
     price: "uniswap",
     chainId: 8453,
     rpcUrl: "https://mainnet.base.org",
-    blockExplorer: "https://basescan.org/"
+    blockExplorer: "https://basescan.org/",
   },
   arbitrum: {
     name: "arbitrum",
@@ -409,37 +401,37 @@ export const NETWORKS = {
     chainId: 42161,
     blockExplorer: "https://arbiscan.io/",
     rpcUrl: `https://arb-mainnet.g.alchemy.com/v2/tYM-Tr8c9dHV5a8AgvXnVmS9e-xvoxeM`,
-    //gasPrice: 1000000000,// TODO ASK RPC
+    // gasPrice: 1000000000,// TODO ASK RPC
     erc20Tokens: [
       {
         name: "ARB",
         address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
         decimals: 18,
-        imgSrc: "/ARB.png"
+        imgSrc: "/ARB.png",
       },
       {
         name: "USDC",
         address: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
         decimals: 6,
-        imgSrc: "/USDC.png"
+        imgSrc: "/USDC.png",
       },
       {
         name: "USDT",
         address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
         decimals: 6,
-        imgSrc: "/USDT.png"
+        imgSrc: "/USDT.png",
       },
       {
         name: "DAI",
         address: "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
         decimals: 18,
-        imgSrc: "/DAI.png"
+        imgSrc: "/DAI.png",
       },
     ],
     nativeToken: {
-      name:"ETH",
-      imgSrc:"/ETH.png"
-    }
+      name: "ETH",
+      imgSrc: "/ETH.png",
+    },
   },
   gnosis: {
     name: "gnosis",
@@ -459,13 +451,13 @@ export const NETWORKS = {
         name: "EURe",
         address: "0xcB444e90D8198415266c6a2724b7900fb12FC56E",
         decimals: 18,
-        imgSrc: "/EURe.png"
+        imgSrc: "/EURe.png",
       },
     ],
     nativeToken: {
-      name:"xDAI",
-      imgSrc:"/xDAI.png"
-    }
+      name: "xDAI",
+      imgSrc: "/xDAI.png",
+    },
   },
   polygon: {
     name: "polygon",
@@ -480,13 +472,13 @@ export const NETWORKS = {
         name: "EURe",
         address: "0x18ec0A6E18E5bc3784fDd3a3634b31245ab704F6",
         decimals: 18,
-        imgSrc: "/EURe.png"
+        imgSrc: "/EURe.png",
       },
       {
         name: "USDC",
         address: POLYGON_USDC_ADDRESS,
         decimals: 6,
-        imgSrc: "/USDC.png"
+        imgSrc: "/USDC.png",
       },
       {
         name: "USDT",
@@ -495,8 +487,8 @@ export const NETWORKS = {
         imgSrc: "/USDT.png",
         NativeMetaTransaction: {
           name: "(PoS) Tether USD",
-          ERC712_VERSION: "1"
-        }
+          ERC712_VERSION: "1",
+        },
       },
       {
         name: "DAI",
@@ -505,14 +497,14 @@ export const NETWORKS = {
         imgSrc: "/DAI.png",
         NativeMetaTransaction: {
           name: "(PoS) Dai Stablecoin",
-          ERC712_VERSION: "1"
-        }
+          ERC712_VERSION: "1",
+        },
       },
     ],
     nativeToken: {
-      name:"MATIC",
-      imgSrc:"/MATIC.png"
-    }
+      name: "MATIC",
+      imgSrc: "/MATIC.png",
+    },
   },
   goerli: {
     name: "goerli",
@@ -530,9 +522,8 @@ export const NETWORKS = {
     chainId: 11155111,
     faucet: "https://faucet.sepolia.dev/",
     blockExplorer: "https://sepolia.etherscan.io/",
-    //rpcUrl: `https://rpc.sepolia.dev`,
+    // rpcUrl: `https://rpc.sepolia.dev`,
     rpcUrl: `https://rpc.sepolia.org/`,
-
   },
   localhost: {
     name: "localhost",
@@ -554,13 +545,13 @@ export const NETWORKS = {
         name: "USDC",
         address: ZK_TESTNET_USDC_ADDRESS,
         decimals: 6,
-        imgSrc: "/USDC.png"
-      }
+        imgSrc: "/USDC.png",
+      },
     ],
     nativeToken: {
-      name:"ETH",
-      imgSrc:"/ETH.png"
-    }
+      name: "ETH",
+      imgSrc: "/ETH.png",
+    },
   },
   canto: {
     name: "canto",
@@ -598,4 +589,15 @@ export const NETWORKS = {
     gasPrice: 1000000000,
     token: "ONE",
   },
+};
+
+export const NETWORK = chainId => {
+  let result;
+  for (const n in NETWORKS) {
+    if (NETWORKS[n].chainId == chainId) {
+      result = NETWORKS[n];
+      break;
+    }
+  }
+  return result;
 };
