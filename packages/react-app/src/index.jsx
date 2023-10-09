@@ -2,9 +2,9 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import ReactDOM from "react-dom";
-import App from "./App";
+
+import AppRouter from "./router";
 import "./index.css";
-import { SafeInjectProvider } from "./contexts/SafeInjectContext";
 
 const themes = {
   dark: `${process.env.PUBLIC_URL}/dark-theme.css`,
@@ -23,9 +23,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
-      <SafeInjectProvider>
-        <App subgraphUri={subgraphUri} />
-      </SafeInjectProvider>
+      <AppRouter />
     </ThemeSwitcherProvider>
   </ApolloProvider>,
   document.getElementById("root"),

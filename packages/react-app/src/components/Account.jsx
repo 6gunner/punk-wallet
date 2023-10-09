@@ -57,43 +57,23 @@ export default function Account({
     if (web3Modal.cachedProvider) {
       modalButtons.push(
         <span key="logoutbutton" style={{ verticalAlign: "middle", paddingLeft: 16, fontSize: 32 }}>
-          {/*<Tooltip title="Disconnect Wallet">*/}
-            <LogoutOutlined onClick={logoutOfWeb3Modal} style={{ color: "#1890ff" }} />
-          {/*</Tooltip>*/}
+          {/* <Tooltip title="Disconnect Wallet"> */}
+          <LogoutOutlined onClick={logoutOfWeb3Modal} style={{ color: "#1890ff" }} />
+          {/* </Tooltip> */}
         </span>,
       );
     } else {
       modalButtons.push(
         <span key="loginbutton" style={{ verticalAlign: "middle", paddingLeft: 16, fontSize: 32 }}>
-          {/*<Tooltip title="Connect Wallet">*/}
-            <LoginOutlined  onClick={loadWeb3Modal} style={{ color: "#1890ff" }} />
-          {/*</Tooltip>*/}
+          {/* <Tooltip title="Connect Wallet"> */}
+          <LoginOutlined onClick={loadWeb3Modal} style={{ color: "#1890ff" }} />
+          {/* </Tooltip> */}
         </span>,
       );
     }
   }
 
   const { currentTheme } = useThemeSwitcher();
-
-  const display = minimized ? (
-    ""
-  ) : (
-    <span>
-      {address ? (
-        <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />
-      ) : (
-        "Connecting..."
-      )}
-      <Balance address={address} provider={localProvider} price={price} />
-      <Wallet
-        address={address}
-        provider={userProvider}
-        ensProvider={mainnetProvider}
-        price={price}
-        color={currentTheme == "light" ? "#1890ff" : "#2caad9"}
-      />
-    </span>
-  );
 
   return <>{modalButtons}</>;
 }

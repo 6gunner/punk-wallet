@@ -1,4 +1,5 @@
 import { CaretUpOutlined, ScanOutlined, SendOutlined, ReloadOutlined } from "@ant-design/icons";
+import { ethers } from "ethers";
 import { JsonRpcProvider, StaticJsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import { formatEther, parseEther } from "@ethersproject/units";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -7,7 +8,7 @@ import "antd/dist/antd.css";
 import { useUserAddress } from "eth-hooks";
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import Web3Modal from "web3modal";
-import "./App.css";
+
 import {
   Account,
   Address,
@@ -27,10 +28,10 @@ import {
   Wallet,
   WalletConnectTransactionPopUp,
   WalletConnectV2ConnectionError
-} from "./components";
-import { INFURA_ID, NETWORK, NETWORKS } from "./constants";
-import { Transactor } from "./helpers";
-import { useBalance, useExchangePrice, useGasPrice, useLocalStorage, usePoller, useUserProvider } from "./hooks";
+} from "../components";
+import { INFURA_ID, NETWORK, NETWORKS } from "../constants";
+import { Transactor } from "../helpers";
+import { useBalance, useExchangePrice, useGasPrice, useLocalStorage, usePoller, useUserProvider } from "../hooks";
 
 import WalletConnect from "@walletconnect/client";
 
@@ -41,14 +42,10 @@ import {
   updateWalletConnectSession,
   createWeb3wallet,
   onSessionProposal
-} from "./helpers/WalletConnectV2Helper";
+} from "../helpers/WalletConnectV2Helper";
 
-import { TransactionManager } from "./helpers/TransactionManager";
-import { sendTransaction } from "./helpers/EIP1559Helper";
 
 const { confirm } = Modal;
-
-const { ethers } = require("ethers");
 /*
     Welcome to 🏗 scaffold-eth !
 
@@ -78,14 +75,14 @@ if (!targetNetwork) {
 const DEBUG = false;
 
 // 🛰 providers
-if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
+// if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
 // const mainnetProvider = getDefaultProvider("mainnet", { infura: INFURA_ID, etherscan: ETHERSCAN_KEY, quorum: 1 });
 // const mainnetProvider = new InfuraProvider("mainnet",INFURA_ID);
 //
 // attempt to connect to our own scaffold eth rpc and if that fails fall back to infura...
 // Using StaticJsonRpcProvider as the chainId won't change see https://github.com/ethers-io/ethers.js/issues/901
-const scaffoldEthProvider = new StaticJsonRpcProvider("https://rpc.scaffoldeth.io:48544");
-//const mainnetInfura = new StaticJsonRpcProvider("https://mainnet.infura.io/v3/" + INFURA_ID);
+// const scaffoldEthProvider = new StaticJsonRpcProvider("https://rpc.scaffoldeth.io:48544");
+const mainnetProvider = new StaticJsonRpcProvider("https://mainnet.infura.io/v3/" + INFURA_ID);
 // ( ⚠️ Getting "failed to meet quorum" errors? Check your INFURA_I
 
 // 🏠 Your local provider is usually pointed at your local blockchain
@@ -183,7 +180,7 @@ function App(props) {
     }
   };
 
-  const mainnetProvider = scaffoldEthProvider; //scaffoldEthProvider && scaffoldEthProvider._network ?  : mainnetInfura;
+  // const mainnetProvider = scaffoldEthProvider; //scaffoldEthProvider && scaffoldEthProvider._network ?  : mainnetInfura;
 
   const [injectedProvider, setInjectedProvider] = useState();
 
@@ -338,7 +335,7 @@ function App(props) {
       if (wallectConnectConnector) {
         console.log("Disconnect from Wallet Connect V1");
         await wallectConnectConnector.killSession();
-      }   
+      }
     }
     catch (error) {
       console.error("Coudn't disconnect from Wallet Connect V1", error)
@@ -356,8 +353,8 @@ function App(props) {
       // This is a hack to remove the session manually
       // Otherwise if an old session is stuck, we cannot delete it
       localStorage.removeItem("wc@2:client:0.3//session");
-    }    
-    
+    }
+
     setWalletConnectUrl("");
     setWalletConnectPeerMeta();
     setWallectConnectConnector();
@@ -405,8 +402,8 @@ function App(props) {
         console.log("session_request requestEvent", requestEvent);
 
         WalletConnectTransactionPopUp(
-        requestEvent, userProvider, undefined, web3wallet,
-        targetNetwork.chainId);
+          requestEvent, userProvider, undefined, web3wallet,
+          targetNetwork.chainId);
       });
 
       web3wallet.on("session_update", async (event) => {
@@ -470,7 +467,7 @@ function App(props) {
     web3wallet.on("session_proposal", listener);
 
     return () => {
-      web3wallet.off("session_proposal", listener);      
+      web3wallet.off("session_proposal", listener);
     }
   }, [web3wallet, wallectConnectConnector]);
 
@@ -511,7 +508,7 @@ function App(props) {
         console.log("NOT CONNECTED AND wallectConnectConnectorSession", wallectConnectConnectorSession);
         connectWallet(wallectConnectConnectorSession);
         setWalletConnectConnected(true);
-      } else if (walletConnectUrl ) {
+      } else if (walletConnectUrl) {
         // Version 2 is handled separately
         if (walletConnectUrl.includes("@2")) {
           return;
@@ -550,7 +547,7 @@ function App(props) {
       if (walletConnectUrl && walletConnectUrl.includes("@2") && web3wallet && !isWalletConnectV2Connected(web3wallet)) {
         console.log(" 📡 Connecting to Wallet Connect V2....", walletConnectUrl);
         try {
-         await web3wallet.core.pairing.pair({ uri:walletConnectUrl })  
+          await web3wallet.core.pairing.pair({ uri: walletConnectUrl })
         }
         catch (error) {
           console.log("Cannot create pairing", error);
@@ -561,7 +558,7 @@ function App(props) {
     }
 
     pairWalletConnectV2();
-    
+
   }, [walletConnectUrl, web3wallet]);
 
   useMemo(() => {
@@ -715,7 +712,7 @@ function App(props) {
   const options = [];
   for (const id in NETWORKS) {
     options.push(
-      <Select.Option key={id} value={NETWORKS[id].name} style={{lineHeight:1.1}}>
+      <Select.Option key={id} value={NETWORKS[id].name} style={{ lineHeight: 1.1 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", color: NETWORKS[id].color, fontSize: 24 }}>
           {NETWORKS[id].name}
         </div>
@@ -743,6 +740,7 @@ function App(props) {
   );
 
   const loadWeb3Modal = useCallback(async () => {
+    debugger
     const provider = await web3Modal.connect();
     provider.on("disconnect", () => {
       console.log("LOGOUT!");
@@ -940,7 +938,7 @@ function App(props) {
               price={price} />
           }
         </div>
-        
+
         <span style={{ verticalAlign: "middle" }}>
           <div style={{ display: "flex", justifyContent: targetNetwork.erc20Tokens ? "space-evenly" : "center", alignItems: "center" }}>
             <div>
@@ -1001,26 +999,26 @@ function App(props) {
         <div style={{ padding: 10 }}>
           {walletConnectTx ? (
             <Input disabled={true} value={amount} />
-          ) : 
+          ) :
             (
-            token ? 
-              <ERC20Input
-                token={token}
-                amount={amount}
-                setAmount={setAmount}
-              />
-            :
-              <EtherInput
-                price={price || targetNetwork.price}
-                value={amount}
-                token={targetNetwork.token || "ETH"}
-                address={address}
-                provider={localProvider}
-                gasPrice={gasPrice}
-                onChange={value => {
-                  setAmount(value);
-                }}
-              />
+              token ?
+                <ERC20Input
+                  token={token}
+                  amount={amount}
+                  setAmount={setAmount}
+                />
+                :
+                <EtherInput
+                  price={price || targetNetwork.price}
+                  value={amount}
+                  token={targetNetwork.token || "ETH"}
+                  address={address}
+                  provider={localProvider}
+                  gasPrice={gasPrice}
+                  onChange={value => {
+                    setAmount(value);
+                  }}
+                />
             )
           }
         </div>
@@ -1417,9 +1415,9 @@ function App(props) {
           </Col>
 
           {targetNetwork.name == "arbitrum" ||
-          targetNetwork.name == "gnosis" ||
-          targetNetwork.name == "optimism" ||
-          targetNetwork.name == "polygon" ? (
+            targetNetwork.name == "gnosis" ||
+            targetNetwork.name == "optimism" ||
+            targetNetwork.name == "polygon" ? (
             ""
           ) : (
             <Col span={12} style={{ textAlign: "center", opacity: 0.8 }}>

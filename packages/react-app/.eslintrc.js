@@ -22,6 +22,7 @@ module.exports = {
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
     "no-console": "off",
+    "no-debugger": "off",
     "jsx-a11y/accessible-emoji": ["off"],
     "jsx-a11y/click-events-have-key-events": ["off"],
     "jsx-a11y/no-static-element-interactions": ["off"],
@@ -30,5 +31,6 @@ module.exports = {
     "no-restricted-syntax": "off",
     "no-plusplus": "off",
     eqeqeq: "off",
+    "no-unused-vars": "off",
   },
 };

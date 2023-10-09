@@ -1,5 +1,5 @@
-import { WalletOutlined } from "@ant-design/icons";
-import { Button, message, Modal, Spin, Tooltip, Typography, Input, Space  } from "antd";
+import { WalletOutlined, EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Button, message, Modal, Spin, Tooltip, Typography, Input, Space } from "antd";
 import { useUserAddress } from "eth-hooks";
 import { ethers } from "ethers";
 import QR from "qrcode.react";
@@ -9,7 +9,6 @@ import Address from "./Address";
 import Balance from "./Balance";
 import QRPunkBlockie from "./QRPunkBlockie";
 import WalletImport from "./WalletImport";
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -54,15 +53,15 @@ export default function Wallet(props) {
 
   const [showImport, setShowImport] = useState();
 
-  const [deleteCurrentBurner, setDeleteCurrentBurner] = useState( false );
+  const [deleteCurrentBurner, setDeleteCurrentBurner] = useState(false);
 
   const providerSend = props.provider ? (
-      <WalletOutlined
-        style={{ fontSize: 32, color: "#1890ff" }}
-        onClick={() => {
-          setOpen(!open);
-        }}
-      />
+    <WalletOutlined
+      style={{ fontSize: 32, color: "#1890ff" }}
+      onClick={() => {
+        setOpen(!open);
+      }}
+    />
   ) : (
     ""
   );
@@ -116,11 +115,11 @@ export default function Wallet(props) {
     extraPkDisplayAdded[wallet.address] = true;
     extraPkDisplay.push(
       <div key={wallet.address} style={{ fontSize: 38, fontWeight: "bolder", padding: 2, backgroundStyle: "#89e789" }}>
-        <div style={{float:'right'}}>
+        <div style={{ float: "right" }}>
           <Button
             style={{ marginTop: 16 }}
             onClick={() => {
-              setDeleteCurrentBurner(true)
+              setDeleteCurrentBurner(true);
             }}
           >
             <span style={{ marginRight: 8 }}>☢️</span> Delete
@@ -198,7 +197,7 @@ export default function Wallet(props) {
         </span>
       );
 
-      const fullLink = window.origin + "/pk#" + pk
+      const fullLink = window.origin + "/pk#" + pk;
 
       privateKeyDisplay = (
         <div>
@@ -209,8 +208,10 @@ export default function Wallet(props) {
             </Text>
           </div>
 
-          <div style={{marginTop:16}}>
-            <div><b>Punk Wallet:</b></div>
+          <div style={{ marginTop: 16 }}>
+            <div>
+              <b>Punk Wallet:</b>
+            </div>
             <Text style={{ fontSize: 11 }} copyable>
               {fullLink}
             </Text>
@@ -228,7 +229,7 @@ export default function Wallet(props) {
               message.success(<span style={{ position: "relative" }}>Copied Private Key Link</span>);
             }}
           >
-            <div style={{position:"relative",top:34,left:-11}}>
+            <div style={{ position: "relative", top: 34, left: -11 }}>
               <QRPunkBlockie withQr={false} address={selectedAddress} />
             </div>
 
@@ -238,22 +239,13 @@ export default function Wallet(props) {
               level="H"
               includeMargin
               renderAs="svg"
-              imageSettings={{ excavate: true,width:105,height:105 /*, src: "https://punkwallet.io/punk.png",*/}}
+              imageSettings={{ excavate: true, width: 105, height: 105 /* , src: "https://punkwallet.io/punk.png", */ }}
             />
-            <div style={{position:"relative",top:-285,left:172}}>
-              🔑
-            </div>
-            <div style={{position:"relative",top:-305,left:266}}>
-              🔑
-            </div>
-            <div style={{position:"relative",top:-244,left:172}}>
-              🔑
-            </div>
-            <div style={{position:"relative",top:-265,left:262}}>
-              🔑
-            </div>
+            <div style={{ position: "relative", top: -285, left: 172 }}>🔑</div>
+            <div style={{ position: "relative", top: -305, left: 266 }}>🔑</div>
+            <div style={{ position: "relative", top: -244, left: 172 }}>🔑</div>
+            <div style={{ position: "relative", top: -265, left: 262 }}>🔑</div>
           </div>
-
         </div>
       );
     }
@@ -262,13 +254,11 @@ export default function Wallet(props) {
     const [importMnemonic, setImportMnemonic] = useState();
     const [importMnemonicIndex, setImportMnemonicIndex] = useState();
     const [importPrivatekey, setImportPrivatekey] = useState();
-    const [importAddress, setImportAddress] = useState();*/
+    const [importAddress, setImportAddress] = useState(); */
 
-    if ( deleteCurrentBurner ){
-
+    if (deleteCurrentBurner) {
       display = (
         <div>
-
           <h2>Remove this private key from this device?</h2>
 
           <div style={{ float: "left", position: "relative", width: punkSize, height: punkSize, overflow: "hidden" }}>
@@ -285,53 +275,49 @@ export default function Wallet(props) {
             />
           </div>
 
-          <div style={{float:'right'}}><Button
-            style={{ marginTop: 16 }}
-            onClick={() => {
-              //setDeleteCurrentBurner(false)
-              console.log("DELETE THE CURRENT AND FALLBACK TO ",secondBestAccount)
+          <div style={{ float: "right" }}>
+            <Button
+              style={{ marginTop: 16 }}
+              onClick={() => {
+                // setDeleteCurrentBurner(false)
+                console.log("DELETE THE CURRENT AND FALLBACK TO ", secondBestAccount);
 
-              const currentvalueis =  window.localStorage.getItem("metaPrivateKey")
-              console.log("currentvalueis",currentvalueis)
+                const currentvalueis = window.localStorage.getItem("metaPrivateKey");
+                console.log("currentvalueis", currentvalueis);
 
-              window.localStorage.setItem("metaPrivateKey",secondBestAccount)
+                window.localStorage.setItem("metaPrivateKey", secondBestAccount);
 
-              //now tear through all the backups and remove them if they match
-              for (const key in localStorage) {
-                if (key.indexOf("metaPrivateKey_backup") >= 0) {
-                  const pastpk = localStorage.getItem(key);
-                  if(pastpk==currentvalueis){
-                    window.localStorage.removeItem(key)
-                    //console.log("FOUND DELETE",key)
+                // now tear through all the backups and remove them if they match
+                for (const key in localStorage) {
+                  if (key.indexOf("metaPrivateKey_backup") >= 0) {
+                    const pastpk = localStorage.getItem(key);
+                    if (pastpk == currentvalueis) {
+                      window.localStorage.removeItem(key);
+                      // console.log("FOUND DELETE",key)
+                    }
                   }
                 }
-              }
-              setTimeout(()=>{window.location.reload();},100)
-
-            }}
-          >
-            <span style={{ marginRight: 8 }}>☢️</span>Delete
-          </Button></div>
+                setTimeout(() => {
+                  window.location.reload();
+                }, 100);
+              }}
+            >
+              <span style={{ marginRight: 8 }}>☢️</span>Delete
+            </Button>
+          </div>
           <Button
             style={{ marginTop: 16 }}
             onClick={() => {
-              setDeleteCurrentBurner(false)
+              setDeleteCurrentBurner(false);
             }}
           >
             <span style={{ marginRight: 8 }}>💾</span>Keep
           </Button>
-
         </div>
-
-      )
-
-    } else if(showImport){
-      display = (
-        <WalletImport
-          setShowImport={setShowImport}
-        />
       );
-    }else{
+    } else if (showImport) {
+      display = <WalletImport setShowImport={setShowImport} />;
+    } else {
       display = (
         <div>
           {privateKeyDisplay}
@@ -350,14 +336,16 @@ export default function Wallet(props) {
             <div style={{ paddingBottom: 32, borderBottom: "1px solid #CCCCCC" }}>
               <h3>Switch Account:</h3>
               {extraPkDisplay}
-              <div style={{float:'right'}}><Button
-                style={{ marginTop: 16 }}
-                onClick={() => {
-                  setShowImport(!showImport)
-                }}
-              >
-                <span style={{ marginRight: 8 }}>💾</span>Import
-              </Button></div>
+              <div style={{ float: "right" }}>
+                <Button
+                  style={{ marginTop: 16 }}
+                  onClick={() => {
+                    setShowImport(!showImport);
+                  }}
+                >
+                  <span style={{ marginRight: 8 }}>💾</span>Import
+                </Button>
+              </div>
               <Button
                 style={{ marginTop: 16 }}
                 onClick={() => {
@@ -373,7 +361,6 @@ export default function Wallet(props) {
               >
                 <span style={{ marginRight: 8 }}>⚙️</span>Generate
               </Button>
-
             </div>
           ) : (
             ""
@@ -381,7 +368,6 @@ export default function Wallet(props) {
         </div>
       );
     }
-
   }
 
   /* } else {
