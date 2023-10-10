@@ -18,3 +18,18 @@ export const generateRequestId = (): string => {
 
   return new Date().getTime().toString(36);
 };
+
+export const formatAddress = (address: string, size: "short" | "long" = "short") => {
+
+  if (address === "") {
+    return "";
+  }
+  let displayAddress = address.substring(0, 6);
+  if (size === "short") {
+    displayAddress += "..." + address.substring(address.length - 4);
+  } else if (size === "long") {
+    displayAddress = address;
+  }
+  return displayAddress;
+
+}

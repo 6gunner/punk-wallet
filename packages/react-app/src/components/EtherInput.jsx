@@ -41,7 +41,7 @@ export default function EtherInput(props) {
 
   const balance = useBalance(props.provider, props.address, 1000);
   let floatBalance = parseFloat("0.00");
-  let usingBalance = balance;
+  const usingBalance = balance;
 
   let gasCost = 0;
 

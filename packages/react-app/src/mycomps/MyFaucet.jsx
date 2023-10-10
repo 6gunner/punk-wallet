@@ -26,13 +26,19 @@ function MyFaucet(props) {
   };
 
   return (
-    <div>
-      <h1 className="text-center">
+    <div className="flex flex-col align-middle">
+      <h1 className="text-4xl font-black text-center">
         <i className="fa fa-bath" aria-hidden="true" /> Local Smart Chain Faucet
       </h1>
-      <div className="flex">
-        <input type="text" value={value} onChange={handleChange} placeholder="input your address" />
-        <button type="button" onClick={() => requestFacuet()}>
+      <div className="flex flex-row justify-center">
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange}
+          placeholder="input your address"
+          className="border h-8 w-56 px-1"
+        />
+        <button type="button" onClick={() => requestFacuet()} className="border bg-slate-50 px-1">
           Give me ETH
         </button>
       </div>

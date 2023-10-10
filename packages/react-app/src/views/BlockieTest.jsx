@@ -1,10 +1,15 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { ethers } from "ethers";
-
+import { Layout, Button } from "antd";
 import { QRPunkBlockie } from "../components";
 import MyFaucet from "../mycomps/MyFaucet";
 import MyBalance from "../mycomps/Balance";
+import TransformAsset from "../mycomps/TransformAsset";
+import { formatAddress } from "../helpers/utils";
 import useGetAddress from "../myhooks/useGetAddress";
+import styles from "./BlockieTest.module.css";
+
+const { Header, Footer, Sider, Content } = Layout;
 
 const autoConnect = false;
 
@@ -66,24 +71,36 @@ function BlockieTestPage(props) {
   const localProvider = new ethers.providers.JsonRpcProvider();
 
   return (
-    <div>
-      <div>
-        <span style={{ verticalAlign: "middle", paddingLeft: 8, fontSize: props.fontSize ? props.fontSize : 28 }}>
-          {walletAddress}
-        </span>
+    <Layout className={styles.layout}>
+      <Header className={styles.header}>
+        <div className="flex-1"></div>
+        <div className={styles.headerRight}>
+          <span style={{ verticalAlign: "middle", paddingLeft: 8, fontSize: 28, color: "white" }}>
+            {formatAddress(walletAddress)}
+          </span>
+          {
+            walletAddress ?
+              <Button onClick={() => disconnectWallet()} className="border  bg-slate-50 px-1">disconnect</Button>
+              :
+              <Button onClick={() => connectWallet()} className="border bg-slate-50 px-1">connect</Button>
+          }
+        </div>
+      </Header>
+      <Content >
         <MyBalance address={walletAddress} provider={injectedProvider}></MyBalance>
-        {
-          walletAddress ?
-            <button onClick={() => disconnectWallet()}>disconnect</button>
-            :
-            <button onClick={() => connectWallet()}>connect</button>
-        }
-      </div>
-      <QRPunkBlockie withQr address={walletAddress} showAddress />
 
-      <MyFaucet localProvider={localProvider}></MyFaucet>
+        <div className="my-6">
+          <QRPunkBlockie withQr address={walletAddress} showAddress />
+        </div>
 
-    </div>
+        <MyFaucet localProvider={localProvider}></MyFaucet>
+
+        <TransformAsset provider={injectedProvider}>
+
+        </TransformAsset>
+      </Content >
+
+    </Layout >
   );
 }
 
