@@ -601,3 +601,13 @@ export const NETWORK = chainId => {
   }
   return result;
 };
+
+export const SUPPORTED_CHAIN_IDS = () => {
+  const supportedChainIds = [];
+
+  for (const network of Object.values(NETWORKS)) {
+    supportedChainIds.push(network.chainId);
+  }
+
+  return supportedChainIds;
+};

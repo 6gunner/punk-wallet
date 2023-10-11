@@ -32,5 +32,6 @@ module.exports = {
     "no-plusplus": "off",
     eqeqeq: "off",
     "no-unused-vars": "off",
+    "no-use-before-define": "off",
   },
 };

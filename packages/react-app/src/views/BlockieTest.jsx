@@ -4,6 +4,7 @@ import { Layout, Button } from "antd";
 import { QRPunkBlockie } from "../components";
 import MyFaucet from "../mycomps/MyFaucet";
 import MyBalance from "../mycomps/Balance";
+import WalletConnectDemo from "../mycomps/WalletConnectDemo";
 import TransformAsset from "../mycomps/TransformAsset";
 import { formatAddress } from "../helpers/utils";
 import useGetAddress from "../myhooks/useGetAddress";
@@ -98,6 +99,8 @@ function BlockieTestPage(props) {
         <TransformAsset provider={injectedProvider}>
 
         </TransformAsset>
+
+        <WalletConnectDemo></WalletConnectDemo>
       </Content >
 
     </Layout >
