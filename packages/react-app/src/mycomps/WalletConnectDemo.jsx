@@ -202,7 +202,17 @@ const popUpTxModal = (web3wallet, requestEvent, userProvider, chainId) => {
       const response = { id, result, jsonrpc: "2.0" };
       web3wallet.respondSessionRequest({ topic, response });
     },
-    onCancel: async () => { },
+    onCancel: async () => {
+      const response = {
+        id,
+        jsonrpc: "2.0",
+        error: {
+          code: 5000,
+          message: "User rejected.",
+        },
+      };
+      web3wallet.respondSessionRequest({ topic, response });
+    },
   });
 };
 

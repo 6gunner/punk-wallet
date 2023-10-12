@@ -309,6 +309,6 @@ export default function WalletConnectTransactionDisplay({ payload, chainId, curr
   } catch (error) {
     console.error("Cannot prettify transaction", error);
 
-    return <pre>{JSON.stringify(payload.params, null, 2)}</pre>;
+    return <pre>{JSON.stringify(payload.params, null, "\t")}</pre>;
   }
 }
